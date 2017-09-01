@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script>
+      //Onsen UIコンポーネントの読み込み
+      ons.bootstrap();
+      console.log('Onsen UIの読み込みが完了しました。')
+      //nanaのURLを定義
+      var nana = 'http://nana-music.com/sounds/'
+      console.log('nanaのURLは "' + nana + '" です。');
+      //URLダイアログの制御
+      ons.bootstrap().controller('PageController', function() {
+          this.nana_url = '';
+          this.navigation = function() {
+              if (!this.nana_url.indexOf(nana)) {
+                  Input_URL.hide()
+                  //読み込み中の表示をする
+                  //myModal.show();
+                  //view_nana.htmlの各要素を生成
+                  
+                  //view_nana.htmlを表示
+                  myNavigator.pushPage("view_nana.html");
+                  //myModal.hide();
+              }
+              else {
+                  ons.notification.alert('nanaのURLを入力してください。');
+                  console.log('nanaのページではありません。');
+                  this.nana_url = '';
+              }
+          };
+      });
+      
+      //view_nana.htmlの各要素を生成するサブルーチン
+      this.generation =function() {
+          
+      };
+      
+  </script>
+</head>
+
+<body>
+  <ons-navigator swipeable var="myNavigator" page="home.html"></ons-navigator>
+  
+  <ons-template id="home.html">
+      <ons-page>
+          <ons-toolbar>
+              <div class="center" style="color: white">ホーム</div>
+          </ons-toolbar>
+          
+          <div class="wrapper">
+              <a ng-click="Input_URL.show()" class="btn6">URLを入力</a>
+          </div>
+          <ons-dialog var="Input_URL" ng-controller="PageController as page">
+              <div style="text-align: center; padding: 10px;">
+                  <p>
+                      <ons-input id="nana_url" modifier="underbar" placeholder="楽曲のURL" float ng-model="page.nana_url"></ons-input>          
+                  </p>
+                  <p style="margin-top: 10px;">
+                      <ons-button ng-click="page.navigation()" style="background: #e0256c">OK</ons-button>
+                      <ons-button ng-click="Input_URL.hide()" modifier="quiet" style="color: #e0256c">CANCEL</ons-button>
+                  </p>
+              </div>
+          </ons-dialog>
+          
+      </ons-page>
+  </ons-template>
+  
+  <ons-template id="view_nana.html">
+      <ons-page>
+          <ons-toolbar style="background-color: #e0256c">
+              <div class="left"><ons-back-button></ons-back-button></div>
+              <div class="center" style="color: white">aaaaa</div>
+          </ons-toolbar>
+          <ons-speed-dial position="bottom right" direction="up">
+              <ons-fab style="background-color: #e0256c">
+                  <ons-icon icon="fa-bars"></ons-icon>
+              </ons-fab>
+              <ons-speed-dial-item style="background-color: #009688" ng-click="popover.show($event)">
+                  <ons-icon icon="fa-download"></ons-icon>
+              </ons-speed-dial-item>
+              <ons-speed-dial-item style="background-color: #55acee" ng-click="popover.show($event)">
+                  <ons-icon icon="fa-twitter"></ons-icon>
+              </ons-speed-dial-item>
+              <ons-speed-dial-item style="background-color: #ffd700" ng-click="popover.show($event)">
+                  <ons-icon icon="fa-star"></ons-icon>
+              </ons-speed-dial-item>
+          </ons-speed-dial>
+      </ons-page>
+  </ons-template>
+  
+  <ons-modal var="myModal" direction="up">
+      <div style="text-align: center;">
+          <ons-progress-circular indeterminate></ons-progress-circular>
+      </div>
+  </ons-modal>
+  
+  <ons-popover direction="up" var="popover">
+      <div style="padding: 10px; text-align: center;">
+          <p>近日実装予定です。</p>
+          <p><ons-button ng-click="popover.hide()" style="background: #e0256c">閉じる</ons-button></p>
+      </div>
+  </ons-popover>
+  
+</body>
+</html>

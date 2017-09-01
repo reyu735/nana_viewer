@@ -1,0 +1,40 @@
+<!--
+
+  <script>
+  ons.bootstrap()
+  .controller('ShowDialog', function($scope) {
+    this.showDialog = function() {
+      if (this.dialog) {
+        this.dialog.show();
+      }
+    }.bind(this);
+  });
+
+
+  </script>
+
+  <ons-page ng-controller="ShowDialog as page">
+  <ons-toolbar>
+    <div class="center">ホーム</div>
+  </ons-toolbar>
+
+  <ons-list>
+    <ons-list-header>Showing dialogs</ons-list-header>
+    <ons-list-item tappable ng-click="Input_URL.show()">Simple dialog</ons-list-item>
+  </ons-list>
+  
+  <ons-navigator animation="fade" page="test.html"></ons-navigator>
+</ons-page>
+
+<ons-dialog var="Input_URL">
+  <div style="text-align: center; padding: 10px;">
+    <p>
+      <ons-input id="nana_url" modifier="underbar" placeholder="楽曲のURL" float ng-model="page.username"></ons-input>
+    </p>
+    <p style="margin-top: 10px;">
+      <ons-button ng-click="page.login()">OK</ons-button>
+      <ons-button ng-click="Input_URL.hide()" modifier="quiet">CANCEL</ons-button>
+    </p>
+  </div>
+</ons-dialog>
+-->
